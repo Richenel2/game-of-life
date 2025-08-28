@@ -27,7 +27,7 @@ class Grille:
         for _ in range(numberOfAliveCells):
             x = random.randint(0, self.largeur - 1)
             y = random.randint(0, self.hauteur - 1)
-            while self.grille[y][x].etat == 1:
+            while self.grille[y][x].etat:
                 x = random.randint(0, self.largeur - 1)
                 y = random.randint(0, self.hauteur - 1)
             self.grille[y][x].etat = 1
@@ -41,18 +41,17 @@ class Grille:
                     continue
                 if x + i < 0 or x + i >= self.largeur or y + j < 0 or y + j >= self.hauteur:
                     continue
-                if self.state[y + j][x + i].etat == 1:
+                if self.state[y + j][x + i].etat:
                     aliveNeighbours += 1
         return aliveNeighbours
 
-    
     def setNextLife(self):
         for y in range(self.hauteur):
             for x in range(self.largeur):
                 aliveNeighbours = self.getNumberOfAliveNeighbours(x, y)
-                if self.state[y][x].etat == 1 and (aliveNeighbours == 2 or aliveNeighbours == 3):
+                if self.state[y][x].etat and (aliveNeighbours == 2 or aliveNeighbours == 3):
                     self.grille[y][x].etat = 1
-                elif self.state[y][x].etat == 0 and aliveNeighbours == 3:
+                elif not self.state[y][x].etat and aliveNeighbours == 3:
                     self.grille[y][x].etat = 1
                 else:
                     self.grille[y][x].etat = 0
@@ -61,7 +60,7 @@ class Grille:
     def display(self):
         for y in range(self.hauteur):
             for x in range(self.largeur):
-                if self.grille[y][x].etat == 1:
+                if self.grille[y][x].etat:
                     print("1", end="")
                 else:
                     print("0", end="")
