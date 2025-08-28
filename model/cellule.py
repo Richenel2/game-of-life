@@ -4,6 +4,6 @@ class Cellule:
         self.y = y
         self.etat = 0
     def __str__(self):
-        return "O" if self.etat == 1 else "X"
+        return "1" if self.etat == 1 else "0"
     def __repr__(self):
-        return "O" if self.etat == 1 else "X"
+        return "1" if self.etat == 1 else "0"
