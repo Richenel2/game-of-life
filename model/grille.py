@@ -15,7 +15,6 @@ class Grille:
         self.grille[y][x] = cellule
 
     def generateWithUserInput(self, inputString):
-        # use a string like xxxxx/oxxxx/xooxx/xxxx/ooxxx
         lines = inputString.split("/")
         for y in range(self.hauteur):
             for x in range(self.largeur):
@@ -24,6 +23,7 @@ class Grille:
     def generateRandom(self, numberOfAliveCells=None):
         if numberOfAliveCells is None:
             numberOfAliveCells = self.largeur * self.hauteur // 2
+
         for _ in range(numberOfAliveCells):
             x = random.randint(0, self.largeur - 1)
             y = random.randint(0, self.hauteur - 1)
@@ -31,7 +31,7 @@ class Grille:
                 x = random.randint(0, self.largeur - 1)
                 y = random.randint(0, self.hauteur - 1)
             self.grille[y][x].etat = 1
-            self.state[y][x].etat = 1
+        self.state = self.grille.copy()
 
     def getNumberOfAliveNeighbours(self, x, y):
         aliveNeighbours = 0
